@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.ameen.foreground.ForegroundService;
+import com.reinvent.foreground.ForegroundService;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,11 +34,11 @@ public class ForegroundService extends Service {
         String input = intent.getStringExtra("inputExtra");
         createNotificationChannel();
         Intent notificationIntent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         Notification notification =
                 new NotificationCompat.Builder(this, CHANNEL_ID)
-                        .setContentTitle("Foreground Service Sample By Ameen")
+                        .setContentTitle("Foreground Service")
                         .setContentText(getString(R.string.notification_title))
                         .setSmallIcon(R.drawable.ic_launcher_background)
                         .setContentIntent(pendingIntent)
@@ -67,7 +67,7 @@ public class ForegroundService extends Service {
         executor.execute(() -> {
 			Looper.prepare();
 		  // do your background stuff here 
-          Toast.makeText(getBaseContext(), "worked", 5000).show();
+          Toast.makeText(getBaseContext(), "worked", Toast.LENGTH_LONG).show();
         });
     }
 

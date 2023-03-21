@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">Foreground Service</string>
+    <string name="notification_title">ForegroundService</string>
+    <string name="notification_message">The message you want to deliver, Foreground Service Example by reinvent 👍</string>
+
+</resources>

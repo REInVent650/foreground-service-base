@@ -14,21 +14,17 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.reinvent.foreground.ForegroundService;
+import com.reinvent.foreground.NfcUtil;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 public class ForegroundService extends Service {
     public static final String CHANNEL_ID = "ForegroundServiceChannel";
     private ExecutorService executor = Executors.newSingleThreadExecutor();
-	
-	
     @Override
     public void onCreate() {
         super.onCreate();
     }
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String input = intent.getStringExtra("inputExtra");
@@ -51,18 +47,15 @@ public class ForegroundService extends Service {
 
         return START_NOT_STICKY;
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
-
     private void runTask() {
         executor.execute(() -> {
 			Looper.prepare();
@@ -70,7 +63,6 @@ public class ForegroundService extends Service {
           Toast.makeText(getBaseContext(), "worked", Toast.LENGTH_LONG).show();
         });
     }
-
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel serviceChannel =
